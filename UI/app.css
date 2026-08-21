@@ -1,0 +1,77 @@
+body { background-color: #11802f; }
+
+/* Additional CSS for navbar */
+.navbar {
+    background-color: #90c729; /* Blue */
+    padding: 10px 0; /* Optional: Adding some padding for better appearance */
+}
+
+.navbar-brand {
+    color: #8d0e0e; 
+    font-family: 'Forte', sans-serif;
+    font-size: xx-large;
+}
+
+.custom-bg-color {
+    background-color: #11802f;
+}
+
+
+
+.card-wrapper {
+    margin: 5% 0;
+  }
+  
+/* You can adjust the image size by increasing/decreasing the width, height */
+.custom-circle-image {
+  width: 18vw; /* note i used vw not px for better responsive */
+  height: 18vw;
+}
+
+.custom-circle-image img {
+  object-fit: cover;
+}
+
+.card-title {
+  letter-spacing: 1.1px;
+}
+
+.card-text {
+  font-family: MerriweatherRegular;
+  font-size: 22px;
+  line-height: initial;
+}
+
+.dropzone {
+  border-style: dashed;
+  background-color: #17721a;
+}
+
+
+.error {
+  font-family: MerriweatherRegular;
+  font-size: 30px;
+  line-height: initial;
+  color: blue;
+  text-align: center;
+}
+
+#classTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#classTable td, #classTable th {
+  border: 1px solid #191818;
+  padding: 8px;
+}
+
+#classTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #17721a;
+  color: rgb(13, 13, 13);
+}
+
