@@ -216,3 +216,24 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- Project-specific: model artifacts (large/binary) ---
+model/artifacts/*
+server/artifacts/*
+!model/artifacts/.gitkeep
+!server/artifacts/.gitkeep
+*.pkl
+*.h5
+
+# --- Project-specific: raw data / images ---
+model/dataset/*
+!model/dataset/.gitkeep
+model/test_images/*
+!model/test_images/.gitkeep
+server/test_images/*
+!server/test_images/.gitkeep
+UI/test_images/*
+!UI/test_images/.gitkeep
+
+# --- Base64 test dumps ---
+server/b64.txt
