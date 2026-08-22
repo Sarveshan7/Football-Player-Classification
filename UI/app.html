@@ -1,167 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Football Player Classifier</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./dropzone.min.css">
-    <link rel="stylesheet" href="./app.css">
-
-    <style>
-        /* Navbar background color */
-        .navbar {
-            background-color: #007bff
-        }
-
-        /* Navbar text color */
-        .navbar-brand {
-            color: #8d0e0e; 
-            font-family: 'Forte', sans-serif; 
-            font-size: xx-large;
-        }
-
-        .custom-bg-color {
-            background-color: #11802f;
-        }
-
-        /* Card background color */
-        .card {
-            background-color: #11802f; 
-        }
-
-        /* Card title color */
-        .card-title {
-            color: #000810; 
-            font-family: 'Forte', serif; 
-        }
-
-        /* Text color for classification error message */
-        .error {
-            color: #dc3545; /* Red */
-        }
-
-        /* Example of changing font for the entire body */
-        body {
-            font-family: 'Roboto', sans-serif; /* Change font to Roboto */
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Player Classifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./dropzone.min.css">
+<link rel="stylesheet" href="./app.css">
 </head>
-
 <body>
-    <nav class="navbar navbar-light custom-bg-color justify-content-center">
-        <a class="navbar-brand" href="#">Football Player Classifier</a>
-    </nav>
 
-    <div class="container">
-        <div class="row">
-        <div class="col card-wrapper" data-player="cristiano_ronaldo">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/ronaldo.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Cristiano Ronaldo</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>            
-            <div class="col card-wrapper" data-player="erling_haaland">
-                    <div class="card border-0">
-                        <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                            <img class="w-100 h-100" src="./images/haaland.jpg" alt="Card image cap">
-                        </div>
-                        <div class="card-body text-center mt-4">
-                            <h4 class="text-uppercase card-title">Erling Haaland</h4>
-                            </p>
-                        </div>
-                    </div>
-            </div>            
-            <div class="col card-wrapper" data-player="kylian_mbappe">
-                    <div class="card border-0">
-                        <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                            <img class="w-100 h-100" src="./images/mbappe.jpg" alt="Card image cap">
-                        </div>
-                        <div class="card-body text-center mt-4">
-                            <h4 class="text-uppercase card-title">Kylian Mbappe</h4>
-                            </p>
-                        </div>
-                    </div>
-            </div>          
+<div class="wrap">
 
-            <div class="col card-wrapper" data-player="lionel_messi">
-                <div class="card border-0">
-                    <div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image">
-                        <img class="w-100 h-100" src="./images/messi.jpg" alt="Card image cap">
-                    </div>
-                    <div class="card-body text-center mt-4">
-                        <h4 class="text-uppercase card-title">Lionel Messi</h4>
-                        </p>
-                    </div>
-                </div>
-            </div>   
+  <div class="eyebrow">Match night &middot; Image classifier</div>
+  <h1>Who's<br>on the <span>pitch</span>?</h1>
+  <p class="subhead">Drop in a photo and the model calls it, trained to recognize four strikers by face alone.</p>
 
-        </div>
-
-        <div class="row">
-            <div class="col-sm-4">
-                <div class="row">
-                    <div class="col-12 mx-auto">
-                        <form action="/file-upload" class="dropzone" id="dropzone">
-                            <div class="dz-message needsclick">
-                                <img src="./images/upload.png" width="50vw" height="50vw"><br>
-                                <span class="note needsclick">Drop files here or click to upload</span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-3 mx-auto">
-                        <button id="submitBtn" type="button" class="btn btn-success">Classify</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-sm-8 error" id="error" >
-                <p>Can't classify image. Classifier was not able to detect face and two eyes properly</p>    
-            </div>
-
-            <div class="col-sm-4" id="resultHolder">
-            </div>
-            <div class="col-sm-4" id="divClassTable">
-                <table id="classTable">
-                        <tr>
-                            <th>Player</th>
-                            <th>Probability Score</th>
-                        </tr>
-                        <tr>
-                            <td>Cristiano Ronaldo</td>
-                            <td id="score_cristiano_ronaldo"></td>
-                        </tr>
-                        <tr>
-                            <td>Erling Haaland</td>
-                            <td id="score_erling_haaland"></td>
-                        </tr>
-                        <tr>
-                            <td>Kylian Mbappe</td>
-                            <td id="score_kylian_mbappe"></td>
-                        </tr>
-                        <tr>
-                            <td>Lionel Messi</td>
-                            <td id="score_lionel_messi"></td>
-                        </tr>
-                </table>
-            </div>
-            
-        </div>
-
+  <div class="lineup">
+    <div class="player" data-player="cristiano_ronaldo">
+      <span class="num">7</span>
+      <div class="avatar"><img src="./images/ronaldo.jpg" alt="Cristiano Ronaldo"></div>
+      <div class="pname">Ronaldo</div>
+      <div class="prole">Portugal</div>
     </div>
+    <div class="player" data-player="erling_haaland">
+      <span class="num">9</span>
+      <div class="avatar"><img src="./images/haaland.jpg" alt="Erling Haaland"></div>
+      <div class="pname">Haaland</div>
+      <div class="prole">Norway</div>
+    </div>
+    <div class="player" data-player="kylian_mbappe">
+      <span class="num">10</span>
+      <div class="avatar"><img src="./images/mbappe.jpg" alt="Kylian Mbapp&eacute;"></div>
+      <div class="pname">Mbapp&eacute;</div>
+      <div class="prole">France</div>
+    </div>
+    <div class="player" data-player="lionel_messi">
+      <span class="num">10</span>
+      <div class="avatar"><img src="./images/messi.jpg" alt="Lionel Messi"></div>
+      <div class="pname">Messi</div>
+      <div class="prole">Argentina</div>
+    </div>
+  </div>
 
-</body>
-<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
+  <form action="/file-upload" class="dropzone" id="dropzone">
+    <div class="dz-message needsclick">
+      <div class="drop-icon">&uarr;</div>
+      <div class="drop-title">Drop a photo here</div>
+      <div class="drop-sub">or click to browse &middot; JPG or PNG</div>
+    </div>
+  </form>
+
+  <button id="submitBtn" type="button" class="classify-btn">Classify</button>
+
+  <p class="error" id="error">Can't classify image. The classifier couldn't detect a face and two eyes clearly enough.</p>
+
+  <div class="result" id="result">
+    <div class="result-label">Result</div>
+    <div class="call">
+      <div class="avatar"><img id="result-img" src="" alt=""></div>
+      <div>
+        <div class="call-name" id="result-name"></div>
+        <div class="call-conf" id="result-conf"></div>
+      </div>
+    </div>
+    <div class="bars" id="bars"></div>
+  </div>
+
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="./dropzone.min.js"></script>
 <script src="./app.js"></script>
+</body>
 </html>
