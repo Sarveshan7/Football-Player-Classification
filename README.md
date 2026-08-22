@@ -2,6 +2,14 @@
 
 Classifies photos of football players including Cristiano Ronaldo, Lionel Messi, Kylian Mbappé, and Erling Haaland. Uses OpenCV for face detection and wavelet transform features feeding a trained classifier, served via a Flask API with a drag and drop web UI.
 
+# Demo
+
+<p align="center">
+  <img src="UI/screenshots/upload.png" width="600" alt="Upload screen">
+  <br><br>
+  <img src="UI/screenshots/result.png" width="600" alt="Classification result">
+</p>
+
 ## Structure
 
 ```
